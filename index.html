@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACS Films - Stream Movies & TV Series</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="#" class="logo" id="logoHome">
+                    <span class="logo-icon">▶</span>
+                    <span class="logo-text">ACS <span class="logo-highlight">Films</span></span>
+                </a>
+            </div>
+            <div class="nav-center" id="navCenter">
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#" class="nav-link active" data-filter="all-movies">All Movies</a></li>
+                    <li><a href="#" class="nav-link" data-filter="tv-series">TV Series</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">Genre <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></a>
+                        <div class="dropdown-menu" id="genreDropdown"></div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">Languages <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></a>
+                        <div class="dropdown-menu" id="languageDropdown"></div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">Years <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></a>
+                        <div class="dropdown-menu" id="yearDropdown"></div>
+                    </li>
+                    <li><a href="#" class="nav-link" data-filter="collections">Collections</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <div class="search-container" id="searchContainer">
+                    <button class="search-toggle" id="searchToggle" aria-label="Search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    </button>
+                    <div class="search-bar" id="searchBar">
+                        <input type="text" id="searchInput" placeholder="Search movies, TV series..." autocomplete="off">
+                        <button class="search-close" id="searchClose" aria-label="Close search">✕</button>
+                        <div class="search-results" id="searchResults"></div>
+                    </div>
+                </div>
+                <button class="profile-btn" id="profileBtn" aria-label="User profile">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="mainContent">
+        <!-- Hero Section -->
+        <section class="hero" id="heroSection">
+            <div class="hero-backdrop" id="heroBackdrop"></div>
+            <div class="hero-gradient"></div>
+            <div class="hero-content" id="heroContent">
+                <div class="hero-badge">
+                    <span class="badge-icon">🔥</span> Trending Now
+                </div>
+                <h1 class="hero-title" id="heroTitle"></h1>
+                <div class="hero-meta" id="heroMeta"></div>
+                <p class="hero-description" id="heroDescription"></p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-play" id="heroPlayBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        Play
+                    </button>
+                    <button class="btn btn-secondary btn-info" id="heroInfoBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        More Info
+                    </button>
+                </div>
+            </div>
+            <div class="hero-indicators" id="heroIndicators"></div>
+        </section>
+
+        <!-- Content Sections -->
+        <div id="contentSections">
+            <!-- Trending Movies -->
+            <section class="content-section" id="trendingMoviesSection">
+                <div class="section-header">
+                    <h2 class="section-title">🔥 Trending Movies</h2>
+                    <a href="#" class="see-all" data-filter="trending-movies">See All →</a>
+                </div>
+                <div class="carousel-wrapper">
+                    <button class="carousel-arrow arrow-left" aria-label="Scroll left">‹</button>
+                    <div class="carousel" id="trendingMoviesCarousel"></div>
+                    <button class="carousel-arrow arrow-right" aria-label="Scroll right">›</button>
+                </div>
+            </section>
+
+            <!-- Trending TV Series -->
+            <section class="content-section" id="trendingTvSection">
+                <div class="section-header">
+                    <h2 class="section-title">📺 Trending TV Series</h2>
+                    <a href="#" class="see-all" data-filter="trending-tv">See All →</a>
+                </div>
+                <div class="carousel-wrapper">
+                    <button class="carousel-arrow arrow-left" aria-label="Scroll left">‹</button>
+                    <div class="carousel" id="trendingTvCarousel"></div>
+                    <button class="carousel-arrow arrow-right" aria-label="Scroll right">›</button>
+                </div>
+            </section>
+
+            <!-- All Movies -->
+            <section class="content-section" id="allMoviesSection">
+                <div class="section-header">
+                    <h2 class="section-title">🎬 All Movies</h2>
+                    <a href="#" class="see-all" data-filter="all-movies">See All →</a>
+                </div>
+                <div class="carousel-wrapper">
+                    <button class="carousel-arrow arrow-left" aria-label="Scroll left">‹</button>
+                    <div class="carousel" id="allMoviesCarousel"></div>
+                    <button class="carousel-arrow arrow-right" aria-label="Scroll right">›</button>
+                </div>
+            </section>
+
+            <!-- All TV Series -->
+            <section class="content-section" id="allTvSection">
+                <div class="section-header">
+                    <h2 class="section-title">📺 All TV Series</h2>
+                    <a href="#" class="see-all" data-filter="tv-series">See All →</a>
+                </div>
+                <div class="carousel-wrapper">
+                    <button class="carousel-arrow arrow-left" aria-label="Scroll left">‹</button>
+                    <div class="carousel" id="allTvCarousel"></div>
+                    <button class="carousel-arrow arrow-right" aria-label="Scroll right">›</button>
+                </div>
+            </section>
+
+            <!-- Collections -->
+            <section class="content-section" id="collectionsSection" style="display:none;">
+                <div class="section-header">
+                    <h2 class="section-title">🏆 Curated Collections</h2>
+                </div>
+                <div id="collectionsContainer"></div>
+            </section>
+        </div>
+
+        <!-- Filtered Results Grid -->
+        <section class="filtered-section" id="filteredSection" style="display:none;">
+            <div class="section-header">
+                <h2 class="section-title" id="filteredTitle">Results</h2>
+                <button class="btn btn-secondary btn-back" id="backToHome">← Back to Home</button>
+            </div>
+            <div class="grid-container" id="filteredGrid"></div>
+        </section>
+    </main>
+
+    <!-- Movie Detail Modal -->
+    <div class="modal-overlay" id="movieDetailModal">
+        <div class="modal-content movie-detail-content">
+            <button class="modal-close" id="detailClose" aria-label="Close">✕</button>
+            
+            <!-- Custom Video Player -->
+            <div class="video-player-container" id="videoPlayerContainer">
+                <div class="video-poster" id="videoPoster">
+                    <button class="play-overlay-btn" id="playOverlayBtn" aria-label="Play video">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </button>
+                </div>
+                <video id="videoPlayer" preload="metadata">
+                    <track kind="subtitles" src="" srclang="en" label="English" default>
+                </video>
+                <div class="video-controls" id="videoControls">
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-filled" id="progressFilled"></div>
+                            <div class="progress-thumb" id="progressThumb"></div>
+                        </div>
+                        <div class="time-tooltip" id="timeTooltip">0:00</div>
+                    </div>
+                    <div class="controls-bottom">
+                        <div class="controls-left">
+                            <button class="ctrl-btn" id="playPauseBtn" aria-label="Play/Pause">
+                                <svg class="play-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                                <svg class="pause-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                            </button>
+                            <div class="volume-control">
+                                <button class="ctrl-btn" id="volumeBtn" aria-label="Volume">
+                                    <svg class="vol-high" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                                    <svg class="vol-mute" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                                </button>
+                                <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1" class="volume-slider">
+                            </div>
+                            <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+                        </div>
+                        <div class="controls-right">
+                            <div class="speed-control">
+                                <button class="ctrl-btn" id="speedBtn" aria-label="Playback speed">1x</button>
+                                <div class="speed-menu" id="speedMenu">
+                                    <button data-speed="0.25">0.25x</button>
+                                    <button data-speed="0.5">0.5x</button>
+                                    <button data-speed="0.75">0.75x</button>
+                                    <button data-speed="1" class="active">1x</button>
+                                    <button data-speed="1.25">1.25x</button>
+                                    <button data-speed="1.5">1.5x</button>
+                                    <button data-speed="2">2x</button>
+                                </div>
+                            </div>
+                            <button class="ctrl-btn" id="subtitleBtn" aria-label="Toggle subtitles">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><text x="6" y="15" font-size="8" fill="currentColor" stroke="none">CC</text></svg>
+                            </button>
+                            <button class="ctrl-btn" id="fullscreenBtn" aria-label="Fullscreen">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Movie Info -->
+            <div class="detail-body" id="detailBody">
+                <div class="detail-header">
+                    <h1 class="detail-title" id="detailTitle"></h1>
+                    <div class="detail-actions">
+                        <button class="btn btn-primary btn-watchlist" id="addWatchlistBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                            <span>Add to Watchlist</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="detail-meta" id="detailMeta"></div>
+                
+                <!-- Scores -->
+                <div class="scores-container" id="scoresContainer"></div>
+                
+                <!-- Info Grid -->
+                <div class="info-grid" id="infoGrid"></div>
+                
+                <p class="detail-description" id="detailDescription"></p>
+                
+                <!-- Star Rating -->
+                <div class="rating-section">
+                    <h3>Rate this title</h3>
+                    <div class="star-rating" id="starRating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <span class="rating-text" id="ratingText">Click to rate</span>
+                </div>
+
+                <!-- Comments -->
+                <div class="comments-section">
+                    <h3>Comments</h3>
+                    <div class="comment-form">
+                        <textarea id="commentInput" placeholder="Write a comment..." rows="3"></textarea>
+                        <button class="btn btn-primary" id="submitComment">Post Comment</button>
+                    </div>
+                    <div class="comments-list" id="commentsList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-content auth-content">
+            <button class="modal-close" id="authClose" aria-label="Close">✕</button>
+            <div class="auth-container">
+                <div class="auth-header">
+                    <span class="logo-icon">▶</span>
+                    <h2>Welcome to <span class="logo-highlight">ACS Films</span></h2>
+                </div>
+                
+                <!-- Sign In Form -->
+                <div class="auth-form" id="signInForm">
+                    <h3>Sign In</h3>
+                    <div class="form-group">
+                        <label for="signInEmail">Email</label>
+                        <input type="email" id="signInEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signInPassword">Password</label>
+                        <input type="password" id="signInPassword" placeholder="••••••••" required>
+                    </div>
+                    <button class="btn btn-primary btn-full" id="signInBtn">Sign In</button>
+                    <div class="auth-divider"><span>or continue with</span></div>
+                    <div class="social-buttons">
+                        <button class="btn btn-social btn-google" id="googleSignIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                            Sign in with Google
+                        </button>
+                        <button class="btn btn-social btn-apple" id="appleSignIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            Sign in with Apple
+                        </button>
+                    </div>
+                    <p class="auth-switch">Don't have an account? <a href="#" id="showSignUp">Sign Up</a></p>
+                </div>
+
+                <!-- Sign Up Form -->
+                <div class="auth-form" id="signUpForm" style="display:none;">
+                    <h3>Create Account</h3>
+                    <div class="form-group">
+                        <label for="signUpName">Full Name</label>
+                        <input type="text" id="signUpName" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpEmail">Email</label>
+                        <input type="email" id="signUpEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpPassword">Password</label>
+                        <input type="password" id="signUpPassword" placeholder="••••••••" required>
+                    </div>
+                    <button class="btn btn-primary btn-full" id="signUpBtn">Create Account</button>
+                    <div class="auth-divider"><span>or continue with</span></div>
+                    <div class="social-buttons">
+                        <button class="btn btn-social btn-google" id="googleSignUp">
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                            Sign up with Google
+                        </button>
+                        <button class="btn btn-social btn-apple" id="appleSignUp">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            Sign up with Apple
+                        </button>
+                    </div>
+                    <p class="auth-switch">Already have an account? <a href="#" id="showSignIn">Sign In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile Modal -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal-content profile-content">
+            <button class="modal-close" id="profileClose" aria-label="Close">✕</button>
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profileAvatar">U</div>
+                    <div class="profile-info">
+                        <h2 id="profileName">User</h2>
+                        <p id="profileEmail">user@email.com</p>
+                    </div>
+                    <button class="btn btn-secondary" id="logoutBtn">Sign Out</button>
+                </div>
+                <div class="profile-tabs">
+                    <button class="tab-btn active" data-tab="watchlist">Watchlist</button>
+                    <button class="tab-btn" data-tab="history">Watch History</button>
+                    <button class="tab-btn" data-tab="request">Request Movie</button>
+                </div>
+                <div class="tab-content" id="watchlistTab">
+                    <div class="grid-container" id="watchlistGrid">
+                        <p class="empty-state">Your watchlist is empty. Start adding movies!</p>
+                    </div>
+                </div>
+                <div class="tab-content" id="historyTab" style="display:none;">
+                    <div class="grid-container" id="historyGrid">
+                        <p class="empty-state">No watch history yet.</p>
+                    </div>
+                </div>
+                <div class="tab-content" id="requestTab" style="display:none;">
+                    <form class="request-form" id="requestForm">
+                        <h3>Request a Movie or TV Series</h3>
+                        <div class="form-group">
+                            <label for="requestTitle">Title *</label>
+                            <input type="text" id="requestTitle" placeholder="Movie or TV series name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="requestYear">Year</label>
+                            <input type="number" id="requestYear" placeholder="Release year" min="1900" max="2030">
+                        </div>
+                        <div class="form-group">
+                            <label for="requestType">Type</label>
+                            <select id="requestType">
+                                <option value="movie">Movie</option>
+                                <option value="tv">TV Series</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="requestNotes">Additional Notes</label>
+                            <textarea id="requestNotes" placeholder="Any additional information..." rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo-icon">▶</span>
+                <span class="logo-text">ACS <span class="logo-highlight">Films</span></span>
+                <p>Your premium destination for movies and TV series.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Browse</h4>
+                    <a href="#">All Movies</a>
+                    <a href="#">TV Series</a>
+                    <a href="#">Collections</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Help</h4>
+                    <a href="#">FAQ</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Discord</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ACS Films. All rights reserved. Built with ❤️</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
